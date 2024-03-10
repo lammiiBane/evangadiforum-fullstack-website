@@ -26,13 +26,6 @@ function AskQuestion() {
     setForm(() => {
       return { ...form, userId: userData.user.id };
     });
-    // console.log("[[[[[[[[[ Values to be post ", userData.user?.id);
-    // console.log(
-    //   "[[[[[[[[[ Values to be post ",
-    //   form.title,
-    //   form.description,
-    //   userData.user.id
-    // );
 
     try {
       // console.log("ask question>>> 0");
@@ -54,15 +47,13 @@ function AskQuestion() {
       console.log("you've been thrown in to the bin");
     }
   };
-
-  // document.getElementById("email").value = userData.user?.display_name;
   return (
     <div className="container">
       <div className="askcover">
         <div className="askcover__steps">
           <h3>Steps to Write a good question</h3>
           <ul>
-            <li>Summarize your problem in a one-line title</li>
+            <li>aSummarize your problem in a one-line title</li>
             <li>Describe your problem in more deail</li>
             <li>Describe what you tried and what you expected to happen</li>
             <li>Review your question and post it to the site</li>

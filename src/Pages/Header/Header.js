@@ -2,7 +2,6 @@ import React from "react";
 import "./Header.css";
 import logo from "../../images/evangadi-logo-home.png";
 import { Link } from "react-router-dom";
-
 function Header({ logout }) {
   return (
     <div className="header">

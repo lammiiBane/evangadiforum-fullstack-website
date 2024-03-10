@@ -1,21 +1,19 @@
-import axios from "axios";
-import React, { useContext, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { UserContext } from "../../context/UserContext";
-import LandingPage from "../MiddleSection/LandingPage";
-import "./Login.css";
-
+import axios from "axios"
+import React, { useContext, useEffect, useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
+import { UserContext } from "../../context/UserContext"
+import LandingPage from "../MiddleSection/LandingPage"
+import "./Login.css"
 const Login = () => {
-  const [userData, setUserData] = useContext(UserContext);
-  const navigate = useNavigate();
-  const [form, setForm] = useState({});
+  const [userData, setUserData] = useContext(UserContext)
+  const navigate = useNavigate()
+  const [form, setForm] = useState({})
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
+    setForm({ ...form, [e.target.name]: e.target.value })
+  }
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     try {
-      console.log("login>try 0");
       //sending user data to database to be logged in
       const loginRes = await axios.post(
         "http://localhost:4000/api/users/login",
@@ -23,33 +21,31 @@ const Login = () => {
           email: form.email,
           password: form.password,
         }
-      );
-      console.log("login>try 1");
-
+      )
+      console.log("login>try 1")
       //update global state with response from backend(user-info)
       setUserData({
         token: loginRes.data.token,
         user: loginRes.data.user,
-      });
-      console.log("login>try 2");
+      })
+      console.log("login>try 2")
 
       //set localStorage with the token
-      localStorage.setItem("auth-token", loginRes.data.token);
+      localStorage.setItem("auth-token", loginRes.data.token)
 
       //navigate user to homepage
-      navigate("/");
-      console.log("login>try 3");
-
+      navigate("/")
+      console.log("login>try 3")
     } catch (err) {
       // console.log("problem", err.response.data.msg);
       // alert(err.response.data.msg);
-      console.log("you've been thrown to the bin");
+      console.log("you've been thrown to the bin")
     }
-  };
+  }
 
   useEffect(() => {
-    if (userData.user) navigate("/");
-  }, [userData.user, navigate]);
+    if (userData.user) navigate("/")
+  }, [userData.user, navigate])
 
   return (
     <>
@@ -95,7 +91,7 @@ const Login = () => {
         }
       />
     </>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login

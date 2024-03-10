@@ -13,21 +13,15 @@ import LandingPage from "./Pages/MiddleSection/LandingPage";
 import SignUp from "./Pages/SignUp/SignUp";
 function App() {
   const [userData, setUserData] = useContext(UserContext);
-
   const checkLoggedIn = async () => {
-    //check if token already exists in localStorage
     let token = localStorage.getItem("auth-token");
     if (token === null) {
-      //token not in localStorage then set auth token empty
       localStorage.setItem("auth-token", "");
       token = "";
     } else {
-      //if token exists in localStorage then use auth to verify token and get user info
       const userRes = await axios.get("http://localhost:4000/api/users", {
         headers: { "x-auth-token": token },
       });
-
-      //set the global state with user info
       setUserData({
         token,
         user: {
@@ -37,51 +31,32 @@ function App() {
       });
     }
   };
-
   const logout = () => {
-    //set global state to undefined will logout the user
     setUserData({
       token: undefined,
       user: undefined,
     });
-
-    //resetting localStorage
     localStorage.setItem("auth-token", "");
   };
-
   useEffect(() => {
-    //check if the user is logged in
     checkLoggedIn();
   }, []);
   return (
     <Router>
       <Header logout={logout} />
-
-      {/* <LandingPage /> */}
       <div>
         <Routes>
-          {/* Original */}
-
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
-
-          {/* passing logout function as props to Home page */}
           <Route path="/" element={<Home logout={logout} />} />
           <Route path="/home" element={<Home logout={logout} />} />
-
-          {/* Newly added routes */}
-
           <Route path="/ask" element={<AskQuestion />} />
-          {/* <Route path={`/answer`} element={<AnsQuestion />} /> */}
           <Route path={`/answer/:questionId`} element={<AnsQuestion />} />
         </Routes>
       </div>
-      {/* <AnsQuestion />
-      <AskQuestion /> */}
       <Footer />
     </Router>
   );
 }
-
 export default App;
 

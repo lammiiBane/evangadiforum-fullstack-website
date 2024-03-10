@@ -1,3 +1,4 @@
+
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -7,12 +8,14 @@ import LandingPage from "../MiddleSection/LandingPage";
 const SignUp = () => {
   const [form, setForm] = useState({});
   const navigate = useNavigate();
-
   //importing global state from context
   const [userData, setUserData] = useContext(UserContext);
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
+  // let serverAddress=process.env.REACT_APP_serverAddress
+  // console.log(serverAddress);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -20,6 +23,7 @@ const SignUp = () => {
       await axios.post("http://localhost:4000/api/users", form);
 
       //once registered the login automatically so send the new user info to be logged in
+
       const loginRes = await axios.post(
         "http://localhost:4000/api/users/login",
         {
@@ -97,7 +101,7 @@ const SignUp = () => {
                 />
                 <br />
                 <br />
-                {/* <label>Password: </label>  */}
+            
                 <input
                   placeholder="Password"
                   type="password"

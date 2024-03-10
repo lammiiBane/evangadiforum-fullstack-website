@@ -3,22 +3,14 @@ import "./AnsQuestion.css";
 import Question from "../Community/Question";
 import { useParams, useLocation } from "react-router-dom";
 import axios from "axios";
-
 function AnsQuestion(props) {
-  let { questionId } = useParams(); // returns ':7'
-  // console.log(typeof questionId);
+  let { questionId } = useParams(); 
   questionId = parseInt(questionId.slice(1, 2));
-
   const [answer, setAnswer] = useState({});
   const [prevAnswers, setPrevAnswers] = useState();
-
-  // get access to the data on state
   const location = useLocation();
   const { question, currentUserId } = location.state;
-  // console.log("Location data", question);
-
   const handleChange = async (e) => {
-    // console.log(e.target.value);
     await setAnswer({
       answer: e.target.value,
       questionId: question.question_id,
@@ -27,43 +19,26 @@ function AnsQuestion(props) {
   };
   const handleSubmint = async (e) => {
     e.preventDefault();
-    // console.log(">>>>> post answer -1");
     try {
-      // console.log(">>>>> post answer 0");
-      // console.log(answer);
-      // await axios.post("http://localhost:4000/api/questions", {
-      //   answer: answer.answer,
-      // });
       await axios.post("http://localhost:4000/api/answers", {
         answer: answer.answer,
         questionId: answer.questionId,
         userId: answer.userId,
       });
-      // console.log(">>>>> post answer 1");
-      // console.log(">>>>>>>>  your answer is submitted");
       window.location.reload(false);
-
-      // If set to true, the browser will do a complete
-      //  page refresh from the server and not from the
-      // cached version of the page.
     } catch (err) {
-      // console.log(">>>>>>>> ERROR  your answer is not submitted");
       console.log("Answers can't be submitted: ", err);
     }
   };
-
   useEffect(() => {
-    // setAskedQuestion(question);
     const fetchAnswers = async () => {
       const answers = await axios.get(
         `http://localhost:4000/api/answers/${questionId}`
       );
-      // console.log(answers.data);
-      // console.log(answers.data.data);
       setPrevAnswers(() => {
         return answers.data?.data;
       });
-      // console.log(">>>>>>prevAnswers ", prevAnswers);
+
     };
     try {
       fetchAnswers();

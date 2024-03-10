@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { MdAccountCircle } from "react-icons/md";
 import "./Question.css";
-
 function Question({ show }) {
   return (
     <div className="question">
