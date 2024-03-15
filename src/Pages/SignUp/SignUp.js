@@ -25,7 +25,7 @@ const SignUp = () => {
       //once registered the login automatically so send the new user info to be logged in
 
       const loginRes = await axios.post(
-        "http://localhost:4000/api/users/login",
+        "https://evangadi-api.onrender.com/api/users/login",
         {
           email: form.email,
           password: form.password,

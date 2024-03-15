@@ -32,7 +32,7 @@ function AskQuestion() {
       console.log(form);
 
       //sending data to be registered in database
-      await axios.post("http://localhost:4000/api/questions", {
+      await axios.post("https://evangadi-api.onrender.com/api/questions", {
         title: form.title,
         description: form.description,
         userId: userData.user.id,

@@ -17,7 +17,7 @@ const Home = ({ logout }) => {
   useEffect(() => {
     if (!userData.user) navigate("/login")
     const fetchQuestions = async () => {
-      let questions = await axios.get("http://localhost:4000/api/questions")
+      let questions = await axios.get("https://evangadi-api.onrender.com/api/questions")
       questions = questions.data.data
       setAllQuestions(() => {
         return questions

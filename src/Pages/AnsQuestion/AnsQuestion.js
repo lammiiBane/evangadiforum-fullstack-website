@@ -20,7 +20,7 @@ function AnsQuestion(props) {
   const handleSubmint = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:4000/api/answers", {
+      await axios.post("https://evangadi-api.onrender.com/api/answers", {
         answer: answer.answer,
         questionId: answer.questionId,
         userId: answer.userId,
@@ -33,7 +33,7 @@ function AnsQuestion(props) {
   useEffect(() => {
     const fetchAnswers = async () => {
       const answers = await axios.get(
-        `http://localhost:4000/api/answers/${questionId}`
+        `https://evangadi-api.onrender.com/api/answers/${questionId}`
       );
       setPrevAnswers(() => {
         return answers.data?.data;
